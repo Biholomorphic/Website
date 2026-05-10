@@ -3,7 +3,7 @@
   --surface: #14171f;
   --border: #1e2330;
   --accent: #5b8dee;
-  --accent-dim: rgba(91, 141, 238, 0.12);
+  --accent-dim: rgba(91, 141, 238, 0.05);
   --text: #e8eaf0;
   --muted: #6b7280;
   --heading-font: "JetBrains Mono", monospace;
@@ -286,4 +286,9 @@ footer {
   font-size: 0.75rem;
   color: var(--muted);
   letter-spacing: 0.05rem;
+}
+
+/* -- MISC -- */
+.justified {
+  text-align: justify;
 }
