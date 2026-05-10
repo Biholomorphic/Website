@@ -1,0 +1,265 @@
+:root {
+  --bg: #0d0f14;
+  --surface: #14171f;
+  --border: #1e2330;
+  --accent: #5b8dee;
+  --accent-dim: rgba(91, 141, 238, 0.12);
+  --text: #e8eaf0;
+  --muted: #6b7280;
+  --heading-font: "JetBrains Mono", monospace;
+  --body-font: "JetBrains Mono", monospace;
+  --mono-font: "JetBrains Mono", monospace;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--body-font);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* -- NAV --*/
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: rgba(13, 15, 20, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+nav .logo {
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  color: var(--accent);
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav ul a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+
+nav ul a:hover {
+  color: var(--text);
+}
+
+/* -- MAIN -- */
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* -- HERO -- */
+.hero {
+  padding: 7rem 0 5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero .tag {
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.hero h1 {
+  font-family: var(--heading-font);
+  font-size: clamp(2.8em, 6vw, 4.2rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 560px;
+  line-height: 1.8;
+}
+
+/* -- SECTIONS -- */
+section {
+  padding: 4.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+section h2 {
+  font-family: var(--heading-font);
+  font-size: 1.7rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+section p {
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.85;
+}
+
+/* -- TAGS / PILLS -- */
+.tag-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.pill {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid rgba(91, 141, 238, 0.12);
+  border-radius: 5px;
+  padding: 0.3rem 0.75rem;
+  font-family: var(--mono-font);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* -- EDUCATION CARD -- */
+.edu-card {
+  background: var(--accent-dim);
+  color: var(--accent);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.edu-card .degree {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.edu-card .school {
+  font-family: var(--mono-font);
+  font-size: 0.8rem;
+  color: var(--accent);
+  margin-bottom: 0.6rem;
+}
+
+.edu-card .detail {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* -- INTERESTS GRID */
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.interest-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.interest-card .icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.interest-card h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.interest-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* -- PROJECTS -- */
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  transition: border-color 0.2s;
+}
+
+.project-card h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+.interest-card p {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.interest-card:hover,
+.project-card:hover {
+  border-color: var(--accent);
+}
+
+
+/* -- CONTACT -- */
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.contact-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--muted);
+  font-family: var(--mono-font);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.55rem 1rem;
+  transition:
+    color 0.2s,
+    border-color 0.2s;
+}
+
+/* -- FOOTER -- */
+footer {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  font-family: var(--mono-font);
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.05rem;
+}
