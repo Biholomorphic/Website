@@ -237,6 +237,7 @@ section p {
   line-height: 1.6;
 }
 
+.contact-links a:hover,
 .edu-card:hover,
 .interest-card:hover,
 .project-card:hover {
