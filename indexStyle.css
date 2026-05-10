@@ -237,6 +237,14 @@ section p {
   line-height: 1.6;
 }
 
+.project-card a {
+  display: inline-flex;
+  color: var(--accent);
+  font-family: var(--mono-font);
+  font-size: 0.82rem;
+  padding-top: 1rem;
+}
+
 .contact-links a:hover,
 .edu-card:hover,
 .interest-card:hover,
