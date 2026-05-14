@@ -1,14 +1,12 @@
 :root {
-  --bg: #0d0f14;
-  --surface: #14171f;
-  --border: #1e2330;
-  --accent: #5b8dee;
-  --accent-dim: rgba(91, 141, 238, 0.05);
-  --text: #e8eaf0;
-  --muted: #6b7280;
-  --heading-font: "JetBrains Mono", monospace;
-  --body-font: "JetBrains Mono", monospace;
-  --mono-font: "JetBrains Mono", monospace;
+  --bg: #0e1017;
+  --surface: #12151f;
+  --border: #1d2436;
+  --accent: #517fd6;
+  --accent-dim: rgba(81, 127, 214, 0.08);
+  --text: #e6e8f0;
+  --muted: #5c626e;
+  --font: "JetBrains Mono", monospace;
 }
 
 * {
@@ -24,7 +22,7 @@ html {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: var(--body-font);
+  font-family: var(--font);
   font-weight: 300;
   line-height: 1.7;
 }
@@ -44,7 +42,7 @@ nav {
 }
 
 nav .logo {
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.85rem;
   color: var(--accent);
 }
@@ -81,7 +79,7 @@ main {
 }
 
 .hero .tag {
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.75rem;
   color: var(--accent);
   letter-spacing: 0.12em;
@@ -90,7 +88,7 @@ main {
 }
 
 .hero h1 {
-  font-family: var(--heading-font);
+  font-family: var(--font);
   font-size: clamp(2.8em, 6vw, 4.2rem);
   line-height: 1.1;
   letter-spacing: -0.01em;
@@ -111,7 +109,7 @@ section {
 }
 
 section h2 {
-  font-family: var(--heading-font);
+  font-family: var(--font);
   font-size: 1.7rem;
   margin-bottom: 1.5rem;
   letter-spacing: -0.01em;
@@ -137,7 +135,7 @@ section p {
   border: 1px solid rgba(91, 141, 238, 0.12);
   border-radius: 5px;
   padding: 0.3rem 0.75rem;
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.78rem;
   letter-spacing: 0.04em;
 }
@@ -161,7 +159,7 @@ section p {
 }
 
 .edu-card .school {
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.8rem;
   color: var(--accent);
   margin-bottom: 0.6rem;
@@ -217,7 +215,7 @@ section p {
 }
 
 .project-card .status {
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.75rem;
   color: var(--accent);
   letter-spacing: 0.1em;
@@ -240,7 +238,7 @@ section p {
 .project-card a {
   display: inline-flex;
   color: var(--accent);
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.82rem;
   padding-top: 1rem;
 }
@@ -268,7 +266,7 @@ section p {
   gap: 0.5rem;
   text-decoration: none;
   color: var(--muted);
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.85rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -282,7 +280,7 @@ section p {
 footer {
   text-align: center;
   padding: 2.5rem 2rem;
-  font-family: var(--mono-font);
+  font-family: var(--font);
   font-size: 0.75rem;
   color: var(--muted);
   letter-spacing: 0.05rem;
