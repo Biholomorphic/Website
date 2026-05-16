@@ -45,6 +45,12 @@ nav .logo {
   font-family: var(--font);
   font-size: 0.85rem;
   color: var(--accent);
+
+}
+
+nav .logo a, nav .logo a:visited, nav .logo a:active, nav .logo a:hover {
+  color: var(--accent);
+  text-decoration: none;
 }
 
 nav ul {

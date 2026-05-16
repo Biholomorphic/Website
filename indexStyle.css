@@ -47,6 +47,11 @@ nav .logo {
   color: var(--accent);
 }
 
+nav .logo a, nav .logo a:visited, nav .logo a:active, nav .logo a:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
 nav ul {
   list-style: none;
   display: flex;
@@ -289,4 +294,9 @@ footer {
 /* -- MISC -- */
 .justified {
   text-align: justify;
+}
+
+p a, p a:hover, p a:visited, p a:active {
+  color: var(--accent);
+  text-decoration: none;
 }
