@@ -119,6 +119,14 @@ def gen_random_line(start_x, start_y, end_x, end_y, vibranceValue):
         width=2
     )
 
+def fixer(start_x, start_y, vibranceValue):
+    return draw.line(
+        (start_x, start_y, start_x - 1, start_y),
+        fill=(hsv2rgb(230, 1/100, vibranceValue/100)),
+        width=1
+    )
+
+
 arr = np.zeros((canvas_height, canvas_width), dtype=np.uint8)
 
 sample_points = BridsonPoissonDiskSampler(arr, 70)
@@ -168,10 +176,13 @@ for x, y in sample_points:
 
         if offPageX:
             gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y, vibranceValue)
+            fixer(newStartX, newStartY, vibranceValue)
         if offPageY:
             gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height, vibranceValue)
+            fixer(newStartX, newStartY, vibranceValue)
         if offPageX and offPageY:
             gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y % canvas_height, vibranceValue)
+            fixer(newStartX, newStartY, vibranceValue)
 
 output_path = Path('assets/indexHeaderBackground.png')
 output_path.parent.mkdir(parents=True, exist_ok=True)
