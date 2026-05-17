@@ -106,7 +106,7 @@ def BridsonPoissonDiskSampler(arr, radius):
 
     return samples
 
-def gen_random_line(start_x, start_y, end_x, end_y):
+def gen_random_line(start_x, start_y, end_x, end_y, vibranceValue):
     # start_x = random.randint(0, canvas_width)
     # start_y = random.randint(0, canvas_height)
 
@@ -115,7 +115,7 @@ def gen_random_line(start_x, start_y, end_x, end_y):
 
     return draw.line(
         (start_x, start_y, end_x, end_y), 
-        fill=(hsv2rgb(230, 1/100, random.choice(random_vibrance_value)/100)), 
+        fill=(hsv2rgb(230, 1/100, vibranceValue/100)), 
         width=2
     )
 
@@ -129,6 +129,7 @@ for x, y in sample_points:
     offPageY = False
     offPageX = False
 
+    vibranceValue = random.choice(random_vibrance_value)
     length = random.choice(random_lengths)
     candidateEnd_x = x + length
     candidateEnd_y = y + length
@@ -163,14 +164,14 @@ for x, y in sample_points:
     
     if accepted:
         samples_proj.append((candidate_start_proj, candidate_end_proj, candidate_perp_proj))
-        gen_random_line(x, y, candidateEnd_x, candidateEnd_y)
+        gen_random_line(x, y, candidateEnd_x, candidateEnd_y, vibranceValue)
 
         if offPageX:
-            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y)
+            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y, vibranceValue)
         if offPageY:
-            gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height)
+            gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height, vibranceValue)
         if offPageX and offPageY:
-            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y % canvas_height)
+            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y % canvas_height, vibranceValue)
 
 output_path = Path('assets/indexHeaderBackground.png')
 output_path.parent.mkdir(parents=True, exist_ok=True)
