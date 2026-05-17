@@ -13,13 +13,16 @@ length_end = 80     # max line length
 vibrance_min = 60   # min vibrance for line colour
 vibrance_max = 95   # max vibrance for line colour
 
+canvas_width    = 1920
+canvas_height   = 1080
+
 
 # --------------------
 # TODO:
 # 1. Add distance testing to the end points, so that they don't overlap with each other.
 #   - Needs to compare to other end points, so need to store in a list and loop through to check min distance.
 
-im = Image.new('RGB', (1920, 1080), "#0e1017")
+im = Image.new('RGB', (canvas_width, canvas_height), "#0e1017")
 draw = ImageDraw.Draw(im)
 
 # Source - https://stackoverflow.com/a/24852375
@@ -104,8 +107,8 @@ def BridsonPoissonDiskSampler(arr, radius):
     return samples
 
 def gen_random_line(start_x, start_y, end_x, end_y):
-    # start_x = random.randint(0, 1920)
-    # start_y = random.randint(0, 1080)
+    # start_x = random.randint(0, canvas_width)
+    # start_y = random.randint(0, canvas_height)
 
     # end_x = start_x + length
     # end_y = start_y + length
@@ -116,7 +119,7 @@ def gen_random_line(start_x, start_y, end_x, end_y):
         width=2
     )
 
-arr = np.zeros((1080, 1920), dtype=np.uint8)
+arr = np.zeros((canvas_height, canvas_width), dtype=np.uint8)
 
 sample_points = BridsonPoissonDiskSampler(arr, 70)
 
@@ -130,14 +133,22 @@ for x, y in sample_points:
     candidateEnd_x = x + length
     candidateEnd_y = y + length
 
-    if candidateEnd_x >= 1920:
+    if candidateEnd_x >= canvas_width:
         offPageX = True
-    if candidateEnd_y >= 1080:
+    if candidateEnd_y >= canvas_height:
         offPageY = True
 
     if offPageX:
-        newStartX = 
-        newStartY = 
+        newStartX = 0
+        newStartY = y + (canvas_width - x) / (candidateEnd_x - x) * (candidateEnd_y - y)
+
+    if offPageY:
+        newStartY = 0
+        newStartX = x + (canvas_height - y) / (candidateEnd_y - y) * (candidateEnd_x - x)
+
+    if offPageX and offPageY:
+        newStartX = 0
+        newStartY = 0
 
     # projections, uses projection formulae at 45deg which causes simplifications, note: perp is perpindicular.
     candidate_start_proj = x + y
@@ -153,6 +164,13 @@ for x, y in sample_points:
     if accepted:
         samples_proj.append((candidate_start_proj, candidate_end_proj, candidate_perp_proj))
         gen_random_line(x, y, candidateEnd_x, candidateEnd_y)
+
+        if offPageX:
+            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y)
+        if offPageY:
+            gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height)
+        if offPageX and offPageY:
+            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y % canvas_height)
 
 output_path = Path('assets/indexHeaderBackground.png')
 output_path.parent.mkdir(parents=True, exist_ok=True)
@@ -179,11 +197,11 @@ im.save(output_path, quality=100)
 # Merged Image
 # ------------
 
-merged = Image.new('RGB', (1920 * 2, 1080 * 2), "#0e1017")
+merged = Image.new('RGB', (canvas_width * 2, canvas_height * 2), "#0e1017")
 merged.paste(im, (0, 0))
-merged.paste(im, (1920, 0))
-merged.paste(im, (0, 1080))
-merged.paste(im, (1920, 1080))
+merged.paste(im, (canvas_width, 0))
+merged.paste(im, (0, canvas_height))
+merged.paste(im, (canvas_width, canvas_height))
 
 output_path = Path('assets/indexHeaderBackground_merged.png')
 output_path.parent.mkdir(parents=True, exist_ok=True)
