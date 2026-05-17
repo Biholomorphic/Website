@@ -119,13 +119,23 @@ def gen_random_line(start_x, start_y, end_x, end_y, vibranceValue):
         width=2
     )
 
-def fixer(start_x, start_y, vibranceValue):
+def fixerX(start_x, start_y, vibranceValue):
     return draw.line(
         (start_x, start_y, start_x - 1, start_y),
         fill=(hsv2rgb(230, 1/100, vibranceValue/100)),
-        width=1
+        width=2
     )
 
+def fixerY(start_x, start_y, vibranceValue):
+    return draw.line(
+        (start_x, start_y, start_x, start_y - 1),
+        fill=(hsv2rgb(230, 1/100, vibranceValue/100)),
+        width=2
+    )
+
+def fixerBoth(start_x, start_y, vibranceValue):
+    fixerX(start_x, start_y, vibranceValue)
+    fixerY(start_x, start_y, vibranceValue)
 
 arr = np.zeros((canvas_height, canvas_width), dtype=np.uint8)
 
@@ -147,17 +157,15 @@ for x, y in sample_points:
     if candidateEnd_y >= canvas_height:
         offPageY = True
 
-    if offPageX:
-        newStartX = 0
-        newStartY = y + (canvas_width - x) / (candidateEnd_x - x) * (candidateEnd_y - y)
-
-    if offPageY:
-        newStartY = 0
-        newStartX = x + (canvas_height - y) / (candidateEnd_y - y) * (candidateEnd_x - x)
-
     if offPageX and offPageY:
         newStartX = 0
         newStartY = 0
+    elif offPageX:
+        newStartX = 0
+        newStartY = y + (canvas_width - x) / (candidateEnd_x - x) * (candidateEnd_y - y)
+    elif offPageY:
+        newStartY = 0
+        newStartX = x + (canvas_height - y) / (candidateEnd_y - y) * (candidateEnd_x - x)
 
     # projections, uses projection formulae at 45deg which causes simplifications, note: perp is perpindicular.
     candidate_start_proj = x + y
@@ -174,15 +182,15 @@ for x, y in sample_points:
         samples_proj.append((candidate_start_proj, candidate_end_proj, candidate_perp_proj))
         gen_random_line(x, y, candidateEnd_x, candidateEnd_y, vibranceValue)
 
-        if offPageX:
-            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y, vibranceValue)
-            fixer(newStartX, newStartY, vibranceValue)
-        if offPageY:
-            gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height, vibranceValue)
-            fixer(newStartX, newStartY, vibranceValue)
         if offPageX and offPageY:
             gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y % canvas_height, vibranceValue)
-            fixer(newStartX, newStartY, vibranceValue)
+            fixerBoth(newStartX, newStartY, vibranceValue)
+        elif offPageX:
+            gen_random_line(newStartX, newStartY, candidateEnd_x % canvas_width, candidateEnd_y, vibranceValue)
+            fixerX(newStartX, newStartY, vibranceValue)
+        elif offPageY:
+            gen_random_line(newStartX, newStartY, candidateEnd_x, candidateEnd_y % canvas_height, vibranceValue)
+            fixerY(newStartX, newStartY, vibranceValue)
 
 output_path = Path('assets/indexHeaderBackground.png')
 output_path.parent.mkdir(parents=True, exist_ok=True)
