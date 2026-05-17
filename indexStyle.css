@@ -81,6 +81,39 @@ main {
 .hero {
   padding: 7rem 0 5rem;
   border-bottom: 1px solid var(--border);
+  z-index: 2;
+  width: 100%;
+  min-height: 100px;
+  position:relative
+}
+
+.hero::before {
+  content: '';
+  background-image: url(assets/indexHeaderBackground_merged.png);
+  position: absolute;
+  inset: 0;
+  background-size: 1080px 1080px;
+  background-repeat: repeat;
+  animation: diagonalSlide 10s linear infinite;
+  opacity: 0.1;
+  z-index: 0;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20%;
+  background: linear-gradient(to bottom, transparent 50%, var(--bg) 100%);
+  z-index: 1;
+}
+
+/* -- One full diagonal slide -- */
+@keyframes diagonalSlide {
+    0% { background-position: 0 0; }
+    100% { background-position: 1080px 1080px; }
 }
 
 .hero .tag {
