@@ -13,7 +13,7 @@ length_end = 80     # max line length
 vibrance_min = 60   # min vibrance for line colour
 vibrance_max = 95   # max vibrance for line colour
 
-canvas_width    = 1920
+canvas_width    = 1080
 canvas_height   = 1080
 
 
